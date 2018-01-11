@@ -14,8 +14,7 @@ const initialState = {
 export function starWars(state = initialState, action) {
   switch (action.type) {
     case Actions.GET_SUCCESS:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         films: action.data.films,
         people: action.data.people,
         planets: action.data.planets,
@@ -23,20 +22,19 @@ export function starWars(state = initialState, action) {
         starships: action.data.starships,
         vehicles: action.data.vehicles,
         isFetching: false
-      };
+      });
+
     case Actions.GET_REQUEST:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         isFetching: true,
         error: null
-      };
+      });
     case Actions.GET_FAILURE:
       console.log("Error:", action.error);
-      return {
-        ...state,
+      return Object.assign({}, state, {
         isFetching: false,
         error: action.error
-      };
+      });
     default:
       return state;
   }
